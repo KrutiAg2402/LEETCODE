@@ -1,0 +1,23 @@
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int l=1,r=n,m;      //left most index = 1 right most = n
+        int pos=1;          //position to keep record where the element bad version is true
+        while(l<=r){
+            m = l+(r-l) / 2;        //middle element
+            
+            boolean x = isBadVersion(m);        //call to check whether midddle elemen is bad or not
+            
+            if(x == true){                      //if mid element is bad than it is obvious that after mid elemnt all elements are bad so we will check the left sub array to find exact position
+                pos = m;
+                r = m-1;
+            }
+            else{       // else we will check right sub array 
+                l = m+1;
+            }
+        }
+        return pos;
+    }
+}
