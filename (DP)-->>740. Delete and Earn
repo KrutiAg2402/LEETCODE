@@ -1,0 +1,25 @@
+class Solution {
+    public int deleteAndEarn(int[] nums) {
+        int inc=0, exc=0;
+        int dp[]= new int[10001]; // <= nums.length <= 2 * 104
+        for(int val:nums)dp[val]++; //for storing frequency of evry number appearing in array on its index
+        
+        for(int i =0;i<=10000;i++){
+            
+            //new include
+            int ni= exc+dp[i]*i;//if the current number is included than take exclude of previous number and product of frequency of number to the index(its val) 
+            suppose 3 id appearing 4 times in an array than we will take 3*4 = 12 +exc value of 2 because here if we include 3 
+            than we have to delete 3-1 = 2 and 3+1 =4 values
+           
+            //new exclude
+            int ne =Math.max(inc,exc);
+            //if we exclude the current value than we have to take the maximum of previous include and exclude value to get max sum value
+            
+            //update inc and exc value to new include and exclude value
+            
+            inc = ni;
+            exc = ne;
+        }
+        return Math.max(inc,exc);
+    }
+}
