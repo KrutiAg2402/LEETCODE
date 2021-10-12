@@ -1,0 +1,34 @@
+class Solution {
+    public int uniquePaths(int m, int n) {
+    //m = rows, n = coloumns
+        ArrayList<String>paths = getmazepath(1,1,m,n);
+        return paths.size();
+    }
+    
+    public ArrayList<String> getmazepath(int sr, int sc, int dr, int dc){
+    
+        if(sr==dr && sc== dc){      //if it reached to the destination it will return blank path
+            ArrayList<String> bres  = new ArrayList<>();
+            bres.add(" ");
+            return bres;
+        }
+    ArrayList<String> hpaths = new ArrayList<>();       // for horizontal paths
+    ArrayList<String> vpaths = new ArrayList<>();       // for vertical paths
+    
+    if(sc<dc){
+        hpaths = getmazepath(sr,sc+1,dr,dc);            //if the source point is less than destination point call for horizontal move that is in same row but +1 column
+    }
+    if(sr<dr){
+        vpaths = getmazepath(sr+1,sc,dr,dc);            //if the source point is less than destination point call for vertical move that is in same column but +1 row
+    }
+    
+    ArrayList<String>paths = new ArrayList<>();
+    
+    for(String hpath:hpaths){
+        paths.add("h"+hpaths);
+    }
+    for(String vpath:vpaths){
+        paths.add("v"+vpaths);
+    }
+    return paths;}
+}
