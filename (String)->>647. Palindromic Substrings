@@ -1,0 +1,44 @@
+//here we have used gap strategy where if the substring contain only one character than it is pallindrome and this happens at gap 0
+
+at gap1 = substring is of 2 character and if both the chracter are same than it is a pallindrome other wise not
+
+at gap>1 the substring is more than 2 character than we check that the first and last chracter is smae or not and we check dp for the middle part if both the conditionare true than 
+it is palindrome other wise not'
+
+
+
+
+class Solution {
+    public int countSubstrings(String s) {
+        int n= s.length();
+        boolean  dp [][] = new boolean [n][n];
+        int count=0;
+        for(int g=0;g<n;g++){
+            for(int i=0,j=g;j<dp.length;j++,i++){
+                if(g==0){
+                    dp[i][j]=true;
+                }
+                else if(g==1){
+                    if(s.charAt(i)==s.charAt(j)){
+                        dp[i][j] = true;
+                    }
+                    else{
+                        dp[i][j] = false;
+                    }
+                }
+                else{
+                    if(s.charAt(i)==s.charAt(j)&& dp[i+1][j-1]==true){
+                        dp[i][j] = true;
+                    }
+                    else{
+                        dp[i][j] = false;
+                    }
+                }
+                if(dp[i][j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
